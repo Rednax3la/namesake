@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hello Uncle Mwarv!</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* -------------------------
+       Variables & base reset
+       ------------------------- */
+    :root{
+      --page-bg-a: #0f172a; /* deep navy for contrast layer */
+      --page-bg-b: #0d3b66; /* teal-ish */
+      --glass: rgba(255,255,255,0.07);
+      --card: rgba(255,255,255,0.06);
+      --muted: rgba(255,255,255,0.85);
+      --text: #0f172a;
+      --accent-1: #ff6b6b;
+      --accent-2: #ffb86b;
+      --accent-3: #7b61ff;
+      --accent-4: #40c9a2;
+      --glass-border: rgba(255,255,255,0.08);
+      --shadow-lg: 0 20px 40px rgba(3,7,18,0.6);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: "Poppins", sans-serif;
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background: linear-gradient(135deg, var(--page-bg-a) 0%, var(--page-bg-b) 100%);
+      min-height:100vh;
+      padding:28px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:24px;
+    }
+
+    /* Page wrapper */
+    .container{
+      width:100%;
+      max-width:980px;
+      border-radius:22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow-lg);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px) saturate(120%);
+    }
+
+    /* Header with decorative shapes */
+    .header{
+      position:relative;
+      padding:48px 36px;
+      display:flex;
+      gap:22px;
+      align-items:center;
+      background:
+        radial-gradient(600px 160px at 20% 10%, rgba(123,97,255,0.12), transparent 10%),
+        radial-gradient(600px 160px at 100% 100%, rgba(64,201,162,0.08), transparent 12%),
+        linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+
+    /* Logo placeholder / left area */
+    .logo {
+      width:84px;
+      height:84px;
+      border-radius:14px;
+      background: linear-gradient(135deg, var(--accent-3), #6a4bff 60%, #4d2fff 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      font-family:'Montserrat',sans-serif;
+      box-shadow: 0 8px 24px rgba(75,52,180,0.25);
+      flex-shrink:0;
+    }
+
+    .header-content{
+      flex:1;
+      color:var(--muted);
+    }
+
+    .header h1{
+      font-family:'Montserrat',sans-serif;
+      font-size:28px;
+      color:#fff;
+      letter-spacing:-0.2px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .header p{
+      margin-top:6px;
+      font-size:15px;
+      opacity:0.95;
+      color:rgba(255,255,255,0.92);
+      font-weight:500;
+    }
+
+    /* subtle wave at the bottom of header */
+    .header::after{
+      content:'';
+      position:absolute;
+      left:0;right:0;bottom:-1px;
+      height:32px;
+      background:
+        radial-gradient(60% 100% at 0% 100%, rgba(255,255,255,0.02), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,0.02));
+      pointer-events:none;
+    }
+
+    /* content area */
+    .content{
+      padding:34px;
+      display:block;
+      gap:28px;
+    }
+
+    .section{
+      margin-bottom:28px;
+    }
+
+    h2{
+      font-family:'Montserrat',sans-serif;
+      font-size:20px;
+      color:white;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    /* colorful left border accent */
+    .section h2 .emoji{
+      font-size:18px;
+    }
+
+    .card{
+      margin-top:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:18px;
+      border:1px solid var(--glass-border);
+      box-shadow: 0 8px 20px rgba(2,6,23,0.45);
+    }
+
+    p{
+      color:rgba(255,255,255,0.9);
+      line-height:1.65;
+      font-size:15px;
+      margin-bottom:12px;
+      font-weight:400;
+    }
+
+    .highlight{
+      display:inline-block;
+      padding:3px 8px;
+      border-radius:8px;
+      font-weight:600;
+      font-size:0.95em;
+      background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      color: white;
+      box-shadow: inset 0 -6px 12px rgba(0,0,0,0.12);
+    }
+
+    /* Buttons */
+    .button-container{
+      margin-top:16px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      border:0;
+      padding:12px 18px;
+      border-radius:12px;
+      cursor:pointer;
+      text-decoration:none;
+      font-weight:600;
+      font-family:'Montserrat',sans-serif;
+      transition:transform .18s ease, box-shadow .18s ease;
+      box-shadow: 0 8px 18px rgba(3,7,18,0.45);
+      color:white;
+      will-change:transform;
+      outline: none;
+    }
+    .btn:focus{box-shadow:0 0 0 4px rgba(123,97,255,0.18)}
+    .btn:hover{transform:translateY(-4px)}
+
+    .btn-primary{
+      background: linear-gradient(90deg, var(--accent-3), var(--accent-4));
+      padding:12px 20px;
+    }
+
+    .btn-secondary{
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    }
+
+    .btn-ghost{
+      background: transparent;
+      border:1px solid rgba(255,255,255,0.12);
+      color:rgba(255,255,255,0.95);
+      box-shadow:none;
+    }
+
+    /* Features grid */
+    .features{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+
+    .feature{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.04);
+      transition:transform .18s ease;
+    }
+    .feature:hover{transform:translateY(-6px) rotate(-0.25deg)}
+
+    .feature .icon{
+      min-width:46px;
+      height:46px;
+      border-radius:10px;
+      flex-shrink:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      font-family:'Montserrat',sans-serif;
+      box-shadow: 0 8px 18px rgba(3,7,18,0.45);
+    }
+
+    .feature h3{
+      font-family:'Montserrat',sans-serif;
+      font-size:14px;
+      color:white;
+      margin-bottom:6px;
+    }
+    .feature p{margin:0;color:rgba(255,255,255,0.85);font-size:13.5px}
+
+    /* individual icon colors */
+    .icon.purple{background: linear-gradient(90deg,#8b5cf6,#6d28d9)}
+    .icon.orange{background: linear-gradient(90deg,#ff7a45,#ffb86b)}
+    .icon.teal{background: linear-gradient(90deg,#2dd4bf,#06b6d4)}
+
+    /* closing card / signature */
+    .closing{
+      margin-top:6px;
+      padding:18px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.03);
+      text-align:center;
+      color:rgba(255,255,255,0.95);
+    }
+
+    .signature{
+      font-family:'Montserrat',sans-serif;
+      font-weight:600;
+      margin-top:8px;
+      color:linear-gradient(90deg,var(--accent-3),var(--accent-4));
+      font-style:italic;
+    }
+
+    /* responsive */
+    @media (max-width:720px){
+      .header{padding:20px}
+      .container{border-radius:14px}
+      .logo{width:64px;height:64px}
+      .header h1{font-size:20px}
+      .content{padding:20px}
+      .btn{padding:10px 14px}
+    }
+
+    /* prefers reduced motion */
+    @media (prefers-reduced-motion:reduce){
+      .btn,.feature{transition:none}
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container" role="main" aria-label="Hello Uncle Mwarv content">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="logo" aria-hidden="true">AM</div>
+
+      <div class="header-content">
+        <h1>Hello Uncle Mwarv! <span class="emoji" aria-hidden="true">👋</span></h1>
+        <p>Hope you're doing well – it's been a minute!</p>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="content" aria-label="Main content">
+      <article class="section">
+        <div class="card">
+          <p>Just a quick thing – I've officially outgrown the "Uncle Funky" era 😂. Knowing you more as 'Mwarv' through your social presence just stuck!</p>
+        </div>
+      </article>
+
+      <article class="section" aria-labelledby="portfolio-title">
+        <h2 id="portfolio-title"><span class="emoji">🎨</span> A Portfolio Piece for You (Free of Charge!)</h2>
+        <div class="card">
+          <p>I'm focused on growing my art portfolio and would be honoured to draw you. I'm aiming to attract more international clients, and given your incredible platform and standing as a renowned photographer, I thought a collaboration could be mutually beneficial.</p>
+          <p>You'd get a cool portrait, and it would be amazing if you could help share my work with your audience when it's done.</p>
+
+          <!-- NOTE: The original "View My Art Portfolio" button here was removed as requested -->
+        </div>
+      </article>
+
+      <article class="section" aria-labelledby="quicksite-title">
+        <h2 id="quicksite-title"><span class="emoji">💻</span> My New "Quicksite" Venture</h2>
+        <div class="card">
+          <p>On another note, I've also been flexing my developer muscles. I designed a simple service creating small, static websites for people to wish friends a happy birthday, send thank you messages, condolences, formal letters, etc.</p>
+
+          <p>I'm calling them <span class="highlight">"Quicksites"</span> and I'm offering them for just <span class="highlight">Ksh 800</span>.</p>
+
+          <div class="features" role="list">
+            <div class="feature" role="listitem">
+              <div class="icon purple">⚡</div>
+              <div>
+                <h3>Super Fast</h3>
+                <p>15–20 minutes to complete</p>
+              </div>
+            </div>
+
+            <div class="feature" role="listitem">
+              <div class="icon teal">📱</div>
+              <div>
+                <h3>Any Device</h3>
+                <p>Done on laptop or phone</p>
+              </div>
+            </div>
+
+            <div class="feature" role="listitem">
+              <div class="icon orange">💰</div>
+              <div>
+                <h3>Affordable</h3>
+                <p>Only Ksh 800 per site</p>
+              </div>
+            </div>
+          </div>
+
+          <p style="margin-top:12px">If you know anyone who might need a neat, quick, and affordable way to send a special message, please point them my way!</p>
+
+          <div class="button-container" aria-hidden="false">
+            <a class="btn btn-primary" href="https://itsquicksite.vercel.app" target="_blank" rel="noopener">Explore Quicksite</a>
+            <a class="btn btn-secondary" href="https://rednaxela-art.vercel.app" target="_blank" rel="noopener">Art Pricing</a>
+            <!-- kept the Art Pricing / Explore Quicksite buttons as in your original layout -->
+          </div>
+        </div>
+      </article>
+
+      <aside class="closing" aria-label="closing note">
+        <p>No pressure at all on any of this! Just wanted to share what I've been up to.</p>
+        <p>Hope to hear from you soon!</p>
+        <p class="signature">Your namesake,<br><strong>Alexander</strong></p>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>
