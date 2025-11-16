@@ -29,19 +29,15 @@
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
+    html,body{min-height:100%; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
     body{
       font-family: "Poppins", sans-serif;
       color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
       background: linear-gradient(135deg, var(--page-bg-a) 0%, var(--page-bg-b) 100%);
-      min-height:100vh;
       padding:28px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:24px;
+      /* === CHANGE: use normal flow so pages can scroll on mobile === */
+      display:block;
+      -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
     }
 
     /* Page wrapper */
@@ -51,9 +47,10 @@
       border-radius:22px;
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
       box-shadow: var(--shadow-lg);
-      overflow:hidden;
+      overflow:visible; /* ensure content can extend and be scrolled */
       border:1px solid rgba(255,255,255,0.04);
       backdrop-filter: blur(6px) saturate(120%);
+      margin: 0 auto; /* horizontally center */
     }
 
     /* Header with decorative shapes */
@@ -285,12 +282,14 @@
 
     /* responsive */
     @media (max-width:720px){
-      .header{padding:20px}
+      .header{padding:20px;flex-wrap:wrap}
       .container{border-radius:14px}
       .logo{width:64px;height:64px}
       .header h1{font-size:20px}
       .content{padding:20px}
       .btn{padding:10px 14px}
+      /* ensure the container uses breathing room on small screens */
+      .container{margin:12px;}
     }
 
     /* prefers reduced motion */
@@ -381,4 +380,5 @@
     </section>
   </main>
 </body>
-</html>
+  </html>
+  
