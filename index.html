@@ -34,10 +34,10 @@
       font-family: "Poppins", sans-serif;
       color:var(--text);
       background: linear-gradient(135deg, var(--page-bg-a) 0%, var(--page-bg-b) 100%);
-      padding:28px;
-      /* === CHANGE: use normal flow so pages can scroll on mobile === */
+      padding:20px; /* slightly reduced for better centering */
+      /* normal document flow for scrolling */
       display:block;
-      -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Page wrapper */
@@ -47,18 +47,19 @@
       border-radius:22px;
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
       box-shadow: var(--shadow-lg);
-      overflow:visible; /* ensure content can extend and be scrolled */
+      overflow:visible;
       border:1px solid rgba(255,255,255,0.04);
       backdrop-filter: blur(6px) saturate(120%);
-      margin: 0 auto; /* horizontally center */
+      margin: 22px auto; /* horizontally center with auto left/right */
     }
 
     /* Header with decorative shapes */
     .header{
       position:relative;
-      padding:48px 36px;
+      padding-block:36px;
+      padding-inline:36px; /* symmetric horizontal padding to avoid visual lean */
       display:flex;
-      gap:22px;
+      gap:18px;
       align-items:center;
       background:
         radial-gradient(600px 160px at 20% 10%, rgba(123,97,255,0.12), transparent 10%),
@@ -66,7 +67,7 @@
         linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     }
 
-    /* Logo placeholder / left area */
+    /* Logo placeholder with camera icon */
     .logo {
       width:84px;
       height:84px;
@@ -82,9 +83,12 @@
       flex-shrink:0;
     }
 
+    .logo svg{width:44px;height:44px;display:block}
+
     .header-content{
       flex:1;
       color:var(--muted);
+      padding-right:4px; /* tiny padding to avoid overflow visuals */
     }
 
     .header h1{
@@ -137,7 +141,6 @@
       gap:10px;
     }
 
-    /* colorful left border accent */
     .section h2 .emoji{
       font-size:18px;
     }
@@ -256,7 +259,6 @@
     }
     .feature p{margin:0;color:rgba(255,255,255,0.85);font-size:13.5px}
 
-    /* individual icon colors */
     .icon.purple{background: linear-gradient(90deg,#8b5cf6,#6d28d9)}
     .icon.orange{background: linear-gradient(90deg,#ff7a45,#ffb86b)}
     .icon.teal{background: linear-gradient(90deg,#2dd4bf,#06b6d4)}
@@ -280,16 +282,15 @@
       font-style:italic;
     }
 
-    /* responsive */
+    /* responsive adjustments */
     @media (max-width:720px){
-      .header{padding:20px;flex-wrap:wrap}
-      .container{border-radius:14px}
+      body{padding:12px}
+      .header{padding-block:18px;padding-inline:18px;flex-wrap:wrap}
+      .container{border-radius:14px;margin:12px auto}
       .logo{width:64px;height:64px}
       .header h1{font-size:20px}
       .content{padding:20px}
       .btn{padding:10px 14px}
-      /* ensure the container uses breathing room on small screens */
-      .container{margin:12px;}
     }
 
     /* prefers reduced motion */
@@ -303,7 +304,15 @@
   <main class="container" role="main" aria-label="Hello Uncle Mwarv content">
     <!-- HEADER -->
     <header class="header" role="banner">
-      <div class="logo" aria-hidden="true">AM</div>
+      <div class="logo" aria-hidden="true">
+        <!-- Camera SVG icon (white) -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2" y="6" width="20" height="14" rx="3" stroke="rgba(255,255,255,0.95)" stroke-width="1.2" fill="none"/>
+          <circle cx="12" cy="13" r="3.6" stroke="rgba(255,255,255,0.95)" stroke-width="1.2" fill="none"/>
+          <path d="M7 6l1.5-2h7L17 6" stroke="rgba(255,255,255,0.95)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="17.2" cy="8.2" r="0.6" fill="rgba(255,255,255,0.95)"/>
+        </svg>
+      </div>
 
       <div class="header-content">
         <h1>Hello Uncle Mwarv! <span class="emoji" aria-hidden="true">👋</span></h1>
@@ -322,7 +331,7 @@
       <article class="section" aria-labelledby="portfolio-title">
         <h2 id="portfolio-title"><span class="emoji">🎨</span> A Portfolio Piece for You (Free of Charge!)</h2>
         <div class="card">
-          <p>I'm focused on growing my art portfolio and would be honoured to draw you. I'm aiming to attract more international clients, and given your incredible platform and standing as a renowned photographer, I thought a collaboration could be mutually beneficial.</p>
+          <p>I'm focused on growing my art portfolio and would be honoured to draw you. I'm aiming to attract more clients, and given your incredible platform and standing as a renowned photographer, I thought a collaboration could be mutually beneficial.</p>
           <p>You'd get a cool portrait, and it would be amazing if you could help share my work with your audience when it's done.</p>
 
           <!-- NOTE: The original "View My Art Portfolio" button here was removed as requested -->
@@ -367,7 +376,6 @@
           <div class="button-container" aria-hidden="false">
             <a class="btn btn-primary" href="https://itsquicksite.vercel.app" target="_blank" rel="noopener">Explore Quicksite</a>
             <a class="btn btn-secondary" href="https://rednaxela-art.vercel.app" target="_blank" rel="noopener">Art Pricing</a>
-            <!-- kept the Art Pricing / Explore Quicksite buttons as in your original layout -->
           </div>
         </div>
       </article>
@@ -381,4 +389,4 @@
   </main>
 </body>
   </html>
-  
+            
